@@ -1,12 +1,11 @@
 const checkSameArray = []
 const score = document.querySelector('.score')
-const btnRestart = document.querySelector('#restart')
 const winner = document.querySelector('.winner')
 const cards = document.querySelectorAll('.card')
-const winnerSound = new Audio('./winnerSound/winner.mp3')
 
-// restart Game
-btnRestart.addEventListener('click', restartGame)
+
+
+
 
 // main
 let cardOpen = 0
@@ -15,7 +14,7 @@ document.addEventListener('click',e=>{
    if(e.target.matches('.front')){
        const position =e.target.dataset.id
        const parent =   e.target.parentElement
-    parent.classList.add('flip')
+       parent.classList.add('flip')
     
       cardOpen++
     
@@ -52,9 +51,12 @@ document.addEventListener('click',e=>{
          
       
    }
+  if (e.target.matches('.restart')) {
+   const btnRestart = e.target
+   btnRestart.addEventListener('click',restartGame)
+  }
 
 
-//    check if its two
   
 })
 
@@ -78,17 +80,22 @@ document.addEventListener('click',e=>{
 
 
 
-  
+//   reset game
 function restartGame() {
-        winner.classList.add('none')
-       cards.forEach(card=>{
-            card.classList.remove('flip')
-            score.innerText = 0
-       })
+    winner.classList.add('none')
+    cards.forEach(card=>{
+         card.classList.remove('flip')
+        
+    })
+    score.innerText = 0
+    checkSameArray.length = 0
+    cardOpen = 0
+   
 }
 
+// show congo
 function showCongo() {
     winner.classList.remove('none')
-    winnerSound.play()
+   
 
 }
